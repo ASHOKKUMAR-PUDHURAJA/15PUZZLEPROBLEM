@@ -1,0 +1,316 @@
+<html>
+<head>
+	<title>15 puzzle problem</title>
+</head>
+<style>
+	td
+		{
+			width: 80px;
+			height: 80px;
+			text-align: center;
+			font-weight: bold;
+			font-size: 30px;
+			background-color: darkviolet;
+			border-radius: 10px;
+			padding: 10px;
+			border-spacing: 20px;
+			color: lightcyan;
+
+		}
+
+button {
+  background-color: #4CAF50; 
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 20px;
+}	
+button:hover
+{
+	background-color: lightskyblue;
+	color: seagreen;
+}
+	body
+		{
+			background-image: url("img.jpg");
+			background-repeat: repeat-y;
+			background-repeat: repeat-x;
+
+		}
+		#tablevalue
+		{
+ 				 margin-left: auto; 
+ 				 margin-right: auto;
+		}
+		td:hover
+		{
+			background-color: yellowgreen;
+			color: darkred;
+		}
+		h1
+		{
+			text-align: center;
+			color: limegreen;
+			font-size: 50px;
+			top: 50%;
+		}
+}
+</style>
+<body>
+	<h1>15 puzzle problem</h1>
+	<button id="click" onclick="onloadvalues();return false">NEW GAME</button>
+	<h1 id="result"></h1>
+	<table id="tablevalue">
+		<tr id="0">
+			<td id="00" value="9" onclick="changevalue('00',0,0)"  >1</td>
+			<td id="01" value="13" onclick="changevalue('01',0,1);" >2</td>
+			<td id="02" value="14" onclick="changevalue('02',0,2);">3</td>
+			<td id="03" value="0"onclick="changevalue('03',0,3);">4</td>
+		</tr>
+		<tr id="1">
+			<td id="10" value="8"onclick="changevalue('10',1,0);">5</td>
+			<td id="11" value="7"onclick="changevalue('11',1,1);">6</td>
+			<td id="12" value="4"onclick="changevalue('12',1,2);">7</td>
+			<td id="13" value="12"onclick="changevalue('13',1,3);">8</td>
+		</tr>
+		<tr id="2">
+			<td id="20" value="2" onclick="changevalue('20',2,0);">9</td>
+			<td id="21" value="10" onclick="changevalue('21',2,1);">10</td>
+			<td id="22" value="6" onclick="changevalue('22',2,2);">11</td>
+			<td id="23" value="3" onclick="changevalue('23',2,3);">12</td>
+		</tr>
+		<tr id="3">
+			<td id="30" value="5" onclick="changevalue('30',3,0);">13</td>
+			<td id="31" value="1" onclick="changevalue('31',3,1);">14</td>
+			<td id="32" value="11" onclick="changevalue('32',3,2);">15</td>
+			<td id="33" value="15" onclick="changevalue('33',3,3);"></td>
+		</tr>
+	</table>
+<script>
+	function checkcolor()
+	{
+		//let v;
+		for(let i=0;i<4;i++)
+		{
+			for(let j=0;j<4;j++)
+			{
+				
+		if(document.getElementById(i+""+j).textContent=="")
+		{
+			document.getElementById(i+""+j).style.backgroundColor="yellow";
+		}
+		else
+		{
+			document.getElementById(i+""+j).style.backgroundColor="darkviolet";
+		}
+		}
+
+		}
+	}
+	function changevalue(index,row,col)
+	{
+		let change=0;
+		change=document.getElementById(index).textContent;
+		let side1,side2,side3,side4;
+		if((row-1)<0)
+		{
+			side1=row+"";
+			side1+=col;
+		}
+		else
+		{
+			if((row-1)==0)
+			{
+				side1=(row-1)+"";
+				side1+=col;
+			}
+			else
+			{
+				side1=(row-1)*10+col;
+			}
+		}
+		if((row+1)>3)
+		{
+			side4=row+"";
+			side4+=col;
+		}
+		else
+		{
+			
+			if((row+1)==3)
+			{
+				side4=(row+1)+"";
+				side4+=col;
+			}
+			else
+			{
+				side4=(row+1)*10+col;
+			}
+		}
+		if((col-1)<0)
+		{
+			side2=row+"";
+			side2+=col;
+		}
+		else
+		{
+			
+			if((col-1)==0)
+			{
+				side2=row+"";
+				side2+=(col-1);
+			}
+			else
+			{
+				if(row==0)
+				{
+
+					side2=row+"";
+					side2+=(col-1);
+
+				}
+				else
+				{
+						side2=row*10+(col-1);
+				}
+			}
+		}
+		if((col+1)>3)
+		{
+			side3=row+"";
+			side3+=col;
+		}
+		else
+		{
+			if((col+1)==3)
+			{
+				side3=row+"";
+				side3+=(col+1);
+			}
+			else
+			{
+				if(row==0)
+				{
+					side3=row+"";
+					side3+=(col+1);
+				}
+				else
+				{
+				side3=row*10+(col+1);	
+				}
+				
+			}
+		}
+		let temp1,temp2,temp3,temp4;
+		temp1=side1.toString();
+		temp2=side2.toString();
+		temp3=side3.toString();
+		temp4=side4.toString();
+		// document.write(temp1+"</br>");
+		// document.write(temp2+"</br>");
+		// document.write(temp3+"</br>");
+		// document.write(temp4+"</br>");
+		let val1,val2,val3,val4;
+
+		val1=document.getElementById(temp1).textContent;
+		val2=document.getElementById(temp2).textContent;
+		val3=document.getElementById(temp3).textContent;
+		val4=document.getElementById(temp4).textContent;
+
+
+		if(val1=="")
+		{
+			document.getElementById(index).textContent=val1;
+			//document.getElementById(index).style.backgroundColor="yellow";
+			document.getElementById(side1).textContent=change;
+			//document.getElementById(side1).style.backgroundColor="darkviolet";
+		}
+		else if(val2=="")
+		{
+			document.getElementById(index).textContent=val2;
+			//document.getElementById(index).style.backgroundColor="yellow";
+			document.getElementById(side2).textContent=change;
+		//	document.getElementById(side1).style.backgroundColor="darkviolet";
+		}
+		else if(val3=="")
+		{
+			document.getElementById(index).textContent=val3;
+			//document.getElementById(index).style.backgroundColor="yellow";
+			document.getElementById(side3).textContent=change;
+			//document.getElementById(side1).style.backgroundColor="darkviolet";
+		}
+		else if(val4=="")
+		{
+			document.getElementById(index).textContent=val4;
+			//document.getElementById(index).style.backgroundColor="yellow";
+			document.getElementById(side4).textContent=change;
+			//document.getElementById(side1).style.backgroundColor="darkviolet";
+		}
+
+		checkcolor();
+		wincheck();
+	}
+function onloadvalues()
+{
+	let array=["",1,2,3,4,5,6,7,8,9,10,11,12,13,14,15];
+	for (var i = array.length - 1; i > 0; i--) 
+	{
+ 	
+                var j = Math.floor(Math.random() * (i + 1));
+ 
+                var temp = array[i];
+                array[i] = array[j];
+                array[j] = temp;
+    }
+ 
+ let index="";
+ let p=0;
+	for(let i=0;i<=3;i++)
+	{
+		
+		for(let j=0;j<=3;j++)
+		{  
+			index=i+""+j;
+			document.getElementById(index).textContent=array[p];
+			p=p+1;
+
+		}
+		
+		checkcolor();
+		wincheck();
+	}
+	
+}
+function wincheck()
+{
+	let value=1,count=0;
+	for(let i=0;i<4;i++)
+	{
+		for(let j=0;j<4;j++)
+		{
+			if(document.getElementById(i+""+j).textContent==value)
+			{
+			count++;
+			}
+			value=value+1;
+			if(value==16)
+			{
+				value="";
+			}
+		}
+
+	}
+	if(count==16)
+	{
+		document.getElementById("result").innerHTML="congratulations !!!";
+	}
+}
+</script>
+
+</body>
+
+</html>
